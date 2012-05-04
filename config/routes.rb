@@ -1,5 +1,11 @@
 Ineed::Application.routes.draw do
+  
+
   resources :users
+  resources :pages
+  
+ match "/" => "pages#home"
+ match "/dashboard" => "pages#dashbord"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  
+  # Searching content  [ActiveRecord].where("fieldname LIKE ?" , "%keyword%")
   def index
     @users = User.all
 

@@ -4,8 +4,14 @@ one:
   username: MyString
   email: MyString
   password: MyString
+  fbid: MyString
+  twtid: MyString
+  type: 
 
 two:
   username: MyString
   email: MyString
   password: MyString
+  fbid: MyString
+  twtid: MyString
+  type: 
