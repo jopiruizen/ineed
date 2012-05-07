@@ -3,6 +3,15 @@ class Post < ActiveRecord::Base
   # belongs_to :user
   has_many :post_responses
    
+   
+  def Post.needs ( user_id )
+     return Post.where( "user_id = ? AND post_type = 0 ", user_id )
+  end
+  
+  def Post.provides ( userId )
+    return Post.where( "user_id = ? AND post_type = 1 ", user_id )
+  end  
+    
   def related_posts
     #REMOVE all special characters and punctiation
     #split by spaces and tabs
@@ -10,6 +19,10 @@ class Post < ActiveRecord::Base
     #loop through array and use each word as a key word for matching
     keys = related_post_keywords
     results = related_post_sql keys
+    if results.length <= 0 
+      return []
+    end
+    
     sql =  results["sql"]
     values = results["values"]
     return  fetch_related_post sql, values
@@ -54,7 +67,11 @@ class Post < ActiveRecord::Base
   def fetch_related_post ( sql , values )
     function_str = "Post.where(\"#{sql}\" ,  #{values}   )"
     puts "Function: #{function_str}" 
+    
+    #function_str = "Post.where(\"post_type = ? \", 1 )"
+    
     posts = eval "#{function_str}"
+  
     return posts
   end 
    
