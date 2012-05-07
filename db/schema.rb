@@ -11,33 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504220240) do
-
-  create_table "message_logs", :force => true do |t|
-    t.integer  "pmid"
-    t.integer  "userid"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120507003817) do
 
   create_table "post_categories", :force => true do |t|
     t.string   "value"
     t.string   "desc"
-    t.integer  "type"
+    t.integer  "post_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "post_messages", :force => true do |t|
-    t.integer  "postid"
+  create_table "post_response_messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_response_id"
+    t.text     "content"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "post_responses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
-    t.integer  "userid"
-    t.integer  "type"
+    t.integer  "user_id"
+    t.integer  "post_type"
     t.string   "category"
     t.text     "content"
     t.string   "status"
@@ -47,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20120504220240) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "userid"
+    t.integer  "user_id"
     t.string   "fname"
     t.string   "lname"
     t.string   "mname"
@@ -65,23 +66,23 @@ ActiveRecord::Schema.define(:version => 20120504220240) do
   end
 
   create_table "user_ratings", :force => true do |t|
-    t.integer  "targetid"
-    t.integer  "sourceid"
-    t.integer  "type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "target_id"
+    t.integer  "source_id"
+    t.integer  "rating_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "user_reviews", :force => true do |t|
-    t.integer  "targetid"
-    t.integer  "sourceid"
+    t.integer  "target_id"
+    t.integer  "source_id"
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "user_settings", :force => true do |t|
-    t.integer  "userid"
+    t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -95,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20120504220240) do
     t.datetime "updated_at", :null => false
     t.string   "fbid"
     t.string   "twtid"
-    t.string   "type"
+    t.string   "user_type"
   end
 
 end

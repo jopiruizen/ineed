@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PostMessageTest < ActiveSupport::TestCase
+class WebServicesControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
